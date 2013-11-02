@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DdW-mV-fSL"/>
+                        <viewControllerLayoutGuide type="bottom" id="CHn-dL-6Gs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lqc-HW-4uW" customClass="ImageView">
+                                <rect key="frame" x="0.0" y="20" width="320" height="366"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fH4-lv-br4">
+                                <rect key="frame" x="145" y="487" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clipDrawing:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pl5-nw-MV1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmi-ea-Q68">
+                                <rect key="frame" x="140" y="518" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="choosePhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d7Q-e1-AEl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCX-cs-cTg">
+                                <rect key="frame" x="125" y="459" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reset Clip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetClip:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dgd-p4-uNY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nmi-ea-Q68" firstAttribute="top" secondItem="fH4-lv-br4" secondAttribute="bottom" constant="1" id="0xp-hk-stV"/>
+                            <constraint firstItem="fH4-lv-br4" firstAttribute="top" secondItem="bCX-cs-cTg" secondAttribute="bottom" constant="-2" id="3x8-CJ-ilN"/>
+                            <constraint firstAttribute="centerX" secondItem="nmi-ea-Q68" secondAttribute="centerX" id="A97-Z6-f5T"/>
+                            <constraint firstItem="Lqc-HW-4uW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="VNN-OQ-sjx"/>
+                            <constraint firstAttribute="centerX" secondItem="bCX-cs-cTg" secondAttribute="centerX" id="WyS-eJ-P5F"/>
+                            <constraint firstAttribute="trailing" secondItem="Lqc-HW-4uW" secondAttribute="trailing" id="aDd-qg-3lY"/>
+                            <constraint firstItem="CHn-dL-6Gs" firstAttribute="top" secondItem="Lqc-HW-4uW" secondAttribute="bottom" constant="182" id="eEe-dF-RQ5"/>
+                            <constraint firstItem="CHn-dL-6Gs" firstAttribute="top" secondItem="nmi-ea-Q68" secondAttribute="bottom" constant="20" id="ebM-PA-s3H"/>
+                            <constraint firstAttribute="centerX" secondItem="fH4-lv-br4" secondAttribute="centerX" id="enf-Sb-Oco"/>
+                            <constraint firstItem="Lqc-HW-4uW" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="kLN-BX-Cxk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="clipButton" destination="fH4-lv-br4" id="Dgz-yr-aAW"/>
+                        <outlet property="imageView" destination="Lqc-HW-4uW" id="o5d-ev-yaI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
