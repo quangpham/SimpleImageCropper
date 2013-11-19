@@ -14,8 +14,12 @@
 #import <SVProgressHUD.h>
 #import "SelectionLayer.h"
 
-@interface ViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, LayerDrawerDelegate>
+@interface ViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, LayerDrawerDelegate>{
+  BOOL isOverlayRunning;
+}
+- (IBAction)showCamera:(id)sender;
 
+@property (nonatomic, strong) UIImage *croppedImage;
 @property (nonatomic, strong) LayerDrawer *drawer;
 @property (weak, nonatomic) IBOutlet ImageView *imageView;
 @property (assign) BOOL insideView;
@@ -77,13 +81,20 @@
     
   }else{
   	[self.drawer clipImage];
+    self.croppedImage = [self.drawer screenshotLayer];
   }
 }
 
 - (IBAction)saveAsImage:(id)sender{
   UIImage *image = [self.drawer screenshotLayer];
+	[self saveAsImage:image];
+  
+}
+
+
+
+- (void)saveImage:(UIImage*)image{
   NSData *data = UIImagePNGRepresentation(image);
-  NSString *home = NSHomeDirectory();
   
   [SVProgressHUD showWithStatus:@"Saving"];
   ALAuthorizationStatus status =  [ALAssetsLibrary authorizationStatus];
@@ -97,7 +108,6 @@
   }else{
     [[[UIAlertView alloc] initWithTitle:@"Permission" message:@"Please set the appropriate setting in Settings for photo access" delegate:nil cancelButtonTitle:@"Oks" otherButtonTitles:nil, nil] show];
   }
-  
 }
 
 - (IBAction)choosePhoto:(id)sender {
@@ -120,7 +130,12 @@
   NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
   if(CFStringCompare((__bridge CFStringRef)type, kUTTypeImage, 0) == kCFCompareEqualTo){
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self.drawer drawImage:originalImage];
+    if(!isOverlayRunning){
+    	[self.drawer drawImage:originalImage];
+    }else{
+     	[self saveImage:originalImage];
+      isOverlayRunning = NO;
+    }
   }
   
 }
@@ -159,5 +174,21 @@
 - (void)layerDrawer:(LayerDrawer *)drawer didCropAndResizeToBoundingBox:(CGRect)rect{
   
 }
+
+- (IBAction)showCamera:(id)sender {
+  if(self.croppedImage){
+    isOverlayRunning = YES;
+	UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+  [pickerController setDelegate:self];
+  [pickerController setAllowsEditing:YES];
+  UIImageView *view  = [[UIImageView alloc] initWithFrame:[[pickerController view] frame]];
+    [pickerController setCameraOverlayView:view];
+    [view setImage:self.croppedImage];
+    [self presentViewController:pickerController animated:YES completion:nil];
+  }
+
+}
+
 
 @end

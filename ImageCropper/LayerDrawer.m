@@ -88,7 +88,7 @@
   if(( image = [self.imageObject image])){
   	[image drawInRect:[layer bounds]];
   }
-  if(!_clipped || ( _clipped && _drawnLines))
+  if(!_clipped )
   [self.path stroke];
   
   
